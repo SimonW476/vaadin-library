@@ -37,6 +37,7 @@ public class BookForm extends VerticalLayout {
                 .bind(Book::getAuthor, Book::setAuthor);
         binder.forField(isbn)
                 .asRequired()
+                .withValidator(value -> value.length() == 10, "ISBN must be 10 digits")
                 .bind(Book::getIsbn, Book::setIsbn);
 
         formLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0",1));

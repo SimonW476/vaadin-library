@@ -41,7 +41,7 @@ public class Books extends VerticalLayout {
         });
 
         // hide and disable the addBtn if user is not admin
-        if(!authContext.hasRole(Roles.ADMIN)) {
+        if(!this.authContext.hasRole(Roles.ADMIN)) {
             addBtn.setVisible(false);
             addBtn.setEnabled(false);
         }

@@ -27,7 +27,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AnonymousAllowed
 public final class MainLayout extends AppLayout {
 
-    private AuthenticationContext authContext;
+    private final AuthenticationContext authContext;
 
     MainLayout(AuthenticationContext authContext) {
         this.authContext = authContext;
