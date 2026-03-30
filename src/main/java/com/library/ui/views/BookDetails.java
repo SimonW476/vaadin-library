@@ -1,7 +1,7 @@
 package com.library.ui.views;
 
 import com.library.backend.Book;
-import com.library.backend.MockBookRepository;
+import com.library.backend.BookRepository;
 import com.library.security.Roles;
 import com.library.ui.components.BookForm;
 import com.library.ui.components.ViewToolbar;
@@ -16,10 +16,11 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import jakarta.annotation.security.PermitAll;
 
+
 @Route("books")
 @PermitAll
 public class BookDetails extends VerticalLayout implements HasUrlParameter<Long> {
-    private final MockBookRepository bookRepo;
+    private final BookRepository bookRepo;
     private final AuthenticationContext authContext;
 
     private Book book;
@@ -27,7 +28,7 @@ public class BookDetails extends VerticalLayout implements HasUrlParameter<Long>
     private Button editBtn = new Button("Edit");
     private Button deleteBtn = new Button("Delete");
 
-    public BookDetails(MockBookRepository bookRepo, AuthenticationContext authContext) {
+    public BookDetails(BookRepository bookRepo, AuthenticationContext authContext) {
         this.bookRepo = bookRepo;
         this.authContext = authContext;
 

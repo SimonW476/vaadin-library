@@ -1,7 +1,6 @@
 package com.library.ui.views;
 
-import com.library.backend.Book;
-import com.library.backend.MockBookRepository;
+import com.library.backend.BookRepository;
 import com.library.security.Roles;
 import com.library.ui.components.BookGrid;
 import com.library.ui.components.SearchBar;
@@ -18,11 +17,11 @@ import jakarta.annotation.security.PermitAll;
 @PageTitle("Catalogue")
 @Menu(order = 1, icon = "vaadin:book", title = "Catalogue")
 @PermitAll
-public class Books extends VerticalLayout {
-    private final MockBookRepository bookRepo;
+public class Books extends VerticalLayout implements BeforeEnterObserver {
+    private final BookRepository bookRepo;
     private final AuthenticationContext authContext;
 
-    public Books(MockBookRepository bookRepo, AuthenticationContext authContext) {
+    public Books(BookRepository bookRepo, AuthenticationContext authContext) {
         this.bookRepo = bookRepo;
         this.authContext = authContext;
 
@@ -55,4 +54,21 @@ public class Books extends VerticalLayout {
         add(toolbar, grid);
     }
 
+    @Override
+    public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
+        var queryParams = beforeEnterEvent.getLocation().getQueryParameters().getParameters();
+        if(queryParams.containsKey("message")) {
+            String message = queryParams.get("message").getFirst();
+            switch (message) {
+                case "created":
+                    Notification.show("Book created!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+                    break;
+                case "deleted":
+                    Notification.show("Book deleted!").addThemeVariants(NotificationVariant.LUMO_ERROR);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

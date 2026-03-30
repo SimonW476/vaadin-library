@@ -15,6 +15,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import javax.sql.DataSource;
+
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration {
@@ -27,20 +29,12 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
 
     @Bean
-    public UserDetailsManager userDetailsService() {
-        UserDetails user = User.withUsername("user")
-                .password("$2a$10$yIgkZHQUlX2En18XVvLeTeYa125IqenCMDjMOkSMe46xNOoy/1djm") // password
-                .roles(Roles.USER)
-                .build();
-        UserDetails admin = User.withUsername("admin")
-                .password("$2a$10$yIgkZHQUlX2En18XVvLeTeYa125IqenCMDjMOkSMe46xNOoy/1djm") // password
-                .roles(Roles.ADMIN)
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

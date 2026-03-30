@@ -1,7 +1,8 @@
 package com.library.ui.views;
 
 import com.library.backend.Book;
-import com.library.backend.MockBookRepository;
+import com.library.backend.BookRepository;
+import com.library.security.Roles;
 import com.library.ui.components.BookForm;
 import com.library.ui.components.ViewToolbar;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -9,9 +10,12 @@ import com.vaadin.flow.router.Route;
 
 @Route("books/new")
 public class NewBook extends VerticalLayout {
-    private final MockBookRepository bookRepo;
+    private final BookRepository bookRepo;
+    private final Book book = new Book();
+    private final BookForm bookForm = new BookForm();
+    private final Button backBtn = new Button("Back to All Books", VaadinIcon.ARROW_LEFT.create());
 
-    public NewBook(MockBookRepository bookRepo) {
+    public NewBook(BookRepository bookRepo) {
         this.bookRepo = bookRepo;
 
         BookForm bookform = new BookForm();

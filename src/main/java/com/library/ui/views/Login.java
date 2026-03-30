@@ -1,5 +1,6 @@
 package com.library.ui.views;
 
+import com.library.ui.components.ViewToolbar;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.login.LoginForm;

@@ -70,22 +70,22 @@ public final class MainLayout extends AppLayout {
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
         layout.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         authContext.getAuthenticatedUser(UserDetails.class)
-                .ifPresentOrElse(user -> {
-                    Button logout = new Button("Logout", click -> {
-                        this.authContext.logout();
-                    });
-                    logout.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-                    logout.setIcon(VaadinIcon.SIGN_OUT.create());
-                    Span loggedInUser = new Span("Welcome, " + user.getUsername());
-                    layout.add(loggedInUser, logout);
-                }, () -> {
-                    Button login = new Button("Login", click -> {
-                        getUI().ifPresent(ui -> ui.navigate(Login.class));
-                    });
-                    login.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-                    login.setIcon(VaadinIcon.SIGN_IN.create());
-                    layout.add(login);
+            .ifPresentOrElse(user -> {
+                Button logout = new Button("Logout", click -> {
+                    this.authContext.logout();
                 });
+                logout.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+                logout.setIcon(VaadinIcon.SIGN_OUT.create());
+                Span loggedInUser = new Span("Welcome, " + user.getUsername());
+                layout.add(loggedInUser, logout);
+            }, () -> {
+                Button login = new Button("Login", click -> {
+                    getUI().ifPresent(ui -> ui.navigate(Login.class));
+                });
+                login.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+                login.setIcon(VaadinIcon.SIGN_IN.create());
+                layout.add(login);
+            });
         return layout;
     }
 
