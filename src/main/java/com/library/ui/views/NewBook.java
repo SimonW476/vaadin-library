@@ -5,10 +5,14 @@ import com.library.backend.BookRepository;
 import com.library.security.Roles;
 import com.library.ui.components.BookForm;
 import com.library.ui.components.ViewToolbar;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 
 @Route("books/new")
+@RolesAllowed(Roles.ADMIN)
 public class NewBook extends VerticalLayout {
     private final BookRepository bookRepo;
     private final Book book = new Book();

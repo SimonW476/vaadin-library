@@ -1,15 +1,16 @@
 package com.library.ui.views;
 
+import com.library.backend.Book;
 import com.library.backend.BookRepository;
 import com.library.security.Roles;
 import com.library.ui.components.BookGrid;
 import com.library.ui.components.SearchBar;
 import com.library.ui.components.ViewToolbar;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.Menu;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import jakarta.annotation.security.PermitAll;
 
